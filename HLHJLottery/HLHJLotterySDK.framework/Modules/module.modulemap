@@ -1,0 +1,6 @@
+framework module HLHJLotterySDK {
+  umbrella header "HLHJLotterySDK.h"
+
+  export *
+  module * { export * }
+}

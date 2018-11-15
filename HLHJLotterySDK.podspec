@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
 
 
   s.name         = "HLHJLotterySDK"
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
   s.summary      = "抽奖抽奖"
   s.description  = <<-DESC
                    抽奖抽抽奖抽奖抽奖
@@ -21,7 +21,8 @@ Pod::Spec.new do |s|
    'VALID_ARCHS'  => 'arm64 x86_64',
     }
 
-  s.source_files  = 'HLHJLottery/*.{h,m}'
+  s.source_files            = "HLHJLottery/HLHJLotterySDK.framework/Headers/*.{h,m}" 
+  s.ios.vendored_frameworks = "HLHJLottery/HLHJLotterySDK.framework"
   s.dependency      'TMUserCenter'
 
 end

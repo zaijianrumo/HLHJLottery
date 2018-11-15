@@ -15,6 +15,15 @@
 
 @end
 
-@interface HLHLotteryObject : NSObject<HLHLotteryProtocol>
+@protocol HLHLotteryDelegate <NSObject>
+
+- (void)goLoginAction;
+
+@end
+
+
+@interface HLHLotteryObject : NSObject<HLHLotteryProtocol,HLHLotteryDelegate>
+
+@property (nonatomic, weak) id<HLHLotteryDelegate>  delegate;
 
 @end

@@ -11,8 +11,9 @@
 #import <TMSDK/TMHttpUserInstance.h>
 #import <TMSDK/TMHttpUser.h>
 #import <TMSDK/TMEngineConfig.h>
+#import <SetI001/SetI001LoginViewController.h>
 #import "HLHLotteryObject.h"
-@interface HLHJLotteryController ()<UIWebViewDelegate>
+@interface HLHJLotteryController ()<UIWebViewDelegate,HLHLotteryDelegate>
 
 @property (nonatomic, strong) UIWebView *LotteryWebView;
 
@@ -27,7 +28,6 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     [self.view addSubview:self.LotteryWebView];
-    
     NSString * member_code = [[TMHttpUserInstance sharedManager] member_code];
     NSString *token = [TMHttpUser token];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/application/hlhj_transferlottery/wap?token=%@&member_code=%@",[TMEngineConfig sharedManager].domain,token,member_code]]];
@@ -62,6 +62,7 @@
 
       JSContext *context = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
       HLHLotteryObject *lotteryObject = [HLHLotteryObject new];
+    lotteryObject.delegate = self;
       context[@"tmAndroidInf"] = lotteryObject;
 
 }
@@ -71,6 +72,16 @@
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     NSLog(@"加载出错了");
+}
+- (void)goLoginAction {
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+         [self.LotteryWebView reload];
+    });
+    SetI001LoginViewController *login = [[SetI001LoginViewController alloc]init];
+    login.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:login animated:YES];
+    
 }
 
 - (UIWebView *)LotteryWebView {

@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
 
 
   s.name         = "HLHJLotterySDK"
-  s.version      = "1.0.4"
+  s.version      = "1.0.5"
   s.summary      = "抽奖抽奖"
   s.description  = <<-DESC
                    抽奖抽抽奖抽奖抽奖
